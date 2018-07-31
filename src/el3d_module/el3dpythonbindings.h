@@ -6,10 +6,10 @@
 #include <QDir>
 #include <QDebug>
 #include <kongoscene.h>
-#ifdef WITH_CARVE
-#include "carve/poly.hpp"
-#include "carve/input.hpp"
-#include "carve/csg.hpp"
+#ifdef SUPPORT_CARVE
+    #include "carve/poly.hpp"
+    #include "carve/input.hpp"
+    #include "carve/csg.hpp"
 #endif
 using namespace Kongomato;
 class El3dPythonBindings:public QObject
@@ -18,7 +18,9 @@ class El3dPythonBindings:public QObject
     static PyTypeObject coloredpolyline_type;
     Kongomato::Scene::Manager* scene;
     static Kongomato::Scene::Manager* static_scene;
+#ifdef SUPPORT_CARVE
     static carve::csg::CSG* csg;
+#endif
     typedef struct
     {
         PyObject_HEAD
@@ -48,7 +50,7 @@ class El3dPythonBindings:public QObject
     static PyObject* IsCommonVariableSet(PyObject *self,PyObject *args);
     static PyObject* setClassesRelations(PyObject *self,PyObject *args);
 
-#ifdef WITH_CARVE
+#ifdef SUPPORT_CARVE 
     static PyObject* SequencesFromCarvePolyhedron(carve::poly::Polyhedron* ph,PyObject* vertices,PyObject* faces);
     static carve::poly::Polyhedron* CarvePolyhedronFromSequences(PyObject *vertices,PyObject *faces);
     static PyObject* CSGUnion(PyObject *self,PyObject *args);

@@ -1,0 +1,17 @@
+/*.cpp
+/*.h
+/*.cxx
+/*.hxx
+moc_*.cxx*
+moc_*.cpp*
+*.qrc.depends
+/debug
+/release
+/vms/*/*.log
+/vms/*/.vagrant
+cmake_install.cmake
+Makefile
+CMakeCache.txt
+CMakeFiles
+*.so
+*.a

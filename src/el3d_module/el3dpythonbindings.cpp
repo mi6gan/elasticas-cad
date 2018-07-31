@@ -50,7 +50,7 @@ PyObject* El3dPythonBindings::setClassesRelations(PyObject *self,PyObject *args)
     Py_RETURN_NONE;
 }
 
-#ifdef WITH_CARVE
+#ifdef SUPPORT_CARVE
 PyObject* El3dPythonBindings::SequencesFromCarvePolyhedron(carve::poly::Polyhedron* ph,PyObject* vertices,PyObject* faces)
 {
     int cnt=ph->vertices.size();
@@ -721,10 +721,12 @@ void El3dPythonBindings::InitModule()
         {"DrawPolyline",DrawPolyline,METH_VARARGS,NULL},
         {"DrawTexture",DrawTexture,METH_VARARGS,NULL},
         {"TextureSize",TextureSize,METH_VARARGS,NULL},
+        #ifdef SUPPORT_CARVE
         {"CSGUnion",CSGUnion,METH_VARARGS,NULL},
         {"CSGDifference",CSGDifference,METH_VARARGS,NULL},
         {"CSGIntersection",CSGIntersection,METH_VARARGS,NULL},
         {"CSGSlice",CSGSlice,METH_VARARGS,NULL},
+        #endif
         {NULL}
    };
 
@@ -794,7 +796,9 @@ El3dPythonBindings::El3dPythonBindings(Kongomato::Scene::Manager * scene)
    Py_Initialize();
    El3dPythonBindings::InitModule();
    this->scene=scene;
-   csg=new carve::csg::CSG;
+   #ifdef SUPPORT_CARVE
+      csg=new carve::csg::CSG;
+   #endif
 }
 
 El3dPythonBindings::~El3dPythonBindings()
@@ -833,7 +837,9 @@ void El3dPythonBindings::PostExec()
 
 VideoDevice::DrawTarget* El3dPythonBindings::last_draw_target=NULL;
 Kongomato::Scene::Manager* El3dPythonBindings::static_scene=NULL;
-carve::csg::CSG* El3dPythonBindings::csg=NULL;
+#ifdef SUPPORT_CARVE
+  carve::csg::CSG* El3dPythonBindings::csg=NULL;
+#endif
 PyTypeObject El3dPythonBindings::model_type;
 PyTypeObject El3dPythonBindings::coloredpolyline_type;
 

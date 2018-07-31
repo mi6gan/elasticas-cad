@@ -1,4 +1,4 @@
-set(SUPPORT_CARVE TRUE CACHE BOOL "Support features of Carve CSG library")
+set(SUPPORT_CARVE FALSE CACHE BOOL "Support features of Carve CSG library")
 
 file(GLOB EL3D_MODULE_CPPS src/el3d_module/*.cpp)
 list(REMOVE_ITEM EL3D_MODULE_CPPS ${CMAKE_CURRENT_SOURCE_DIR}/src/el3d_module/main.cpp)

@@ -406,31 +406,31 @@ void C2DJacket::UpdatePoints()
     QStringList splinename;
     splinename << "s21" << "s412" << "s911";
     QVariant list[] = { true, P["21"],P["412"],0.3f,0.2f,P["412"],0.2f,
-                        P["912"],P["512"],0.5f,NULL };
+                        P["912"],P["512"],0.5f,0 };
     DrawSpline( splinename, list );
     /////////////////****************************
     splinename.clear();
     splinename << "s330" << "s431" << "s531";
     QVariant list1[] = { true, P["330"],P["431"],0.3f,0.2f,P["431"],0.2f,
-                        P["531"],P["431"],0.3f,NULL };
+                        P["531"],P["431"],0.3f,0 };
     DrawSpline( splinename, list1 );
     /////////////////****************************
     splinename.clear();
     splinename << "s330-1" << "s431-1" << "s531-1";
     QVariant list2[] = { true, P["330"],P["431-1"],0.3f,0.2f,P["431-1"],0.2f,
-                        P["531-1"],P["431-1"],0.3f,NULL };
+                        P["531-1"],P["431-1"],0.3f,0 };
     DrawSpline( splinename, list2 );
     /////////////////****************************
     splinename.clear();
     splinename << "s346" << "s443" << "s542";
     QVariant list3[] = { true, P["346"],P["443"],0.3f,0.2f,P["443"],0.2f,
-                        P["542"],P["443"],0.3f,NULL };
+                        P["542"],P["443"],0.3f,0 };
     DrawSpline( splinename, list3 );
     /////////////////****************************
     splinename.clear();
     splinename << "s346-1" << "s443-1" << "s542-1";
     QVariant list4[] = { true, P["346"],P["443-1"],0.3f,0.2f,P["443-1"],0.2f,
-                        P["542-1"],P["443-1"],0.3f,NULL };
+                        P["542-1"],P["443-1"],0.3f,0 };
     DrawSpline( splinename, list4 );
     /////////////////****************************
     line1.setPoints(P["36"],P["16Krotated"]);
@@ -438,7 +438,7 @@ void C2DJacket::UpdatePoints()
     splinename.clear();
     splinename << "s36-1" << "s461-1" << "s561-1";
     QVariant list5[] = { true, P["36"],line1.p2(),0.3f,0.2f,P["461-1"],0.2f,
-                        P["561-1"],P["461-1"],0.3f,NULL };
+                        P["561-1"],P["461-1"],0.3f,0 };
     DrawSpline( splinename, list5 );
     /////////////////****************************
     line1.setPoints(P["36"],P["461"]);
@@ -446,7 +446,7 @@ void C2DJacket::UpdatePoints()
     splinename.clear();
     splinename << "s36" << "s461" << "s561";
     QVariant list6[] = { true, line1.p2(),P["461"],0.3f,0.2f,P["461"],0.2f,
-                        P["561"],P["461"],0.3f,NULL };
+                        P["561"],P["461"],0.3f,0 };
     DrawSpline( splinename, list6 );
     /////////////////****************************
     P["461u"]= line1.p2();

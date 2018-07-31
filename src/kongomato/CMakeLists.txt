@@ -7,7 +7,7 @@ find_package(Qt4 COMPONENTS QtOpenGL REQUIRED)
 find_package(SDL)
 find_package(SDL_image)
 
-set(SUPPORT_3DS TRUE CACHE BOOL "Support 3ds file format")
+set(SUPPORT_3DS FALSE CACHE BOOL "Support 3ds file format")
 
 if(NOT QT_QTOPENGL_FOUND AND NOT SDLIMAGE_FOUND)
     MESSAGE( FATAL_ERROR "At least one of this library must be installed: Qt4 (with OpenGL module) or SDL (with SDL_image)")

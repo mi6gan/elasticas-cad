@@ -719,7 +719,7 @@ void SubMesh::SaveTo3DS(const std::string & file_name,const std::string mesh_nam
             for(int b=0;b<3;b++){ mesh->faces[a].index[b]=(*ib)[a*3+b];  mesh->faces[a].smoothing_group=1; }
 
 
-        lib3ds_file_insert_mesh(file,mesh,0);
+        lib3ds_file_insert_mesh(file,mesh);
         lib3ds_file_save(file,file_name.c_str());
 
         lib3ds_file_free(file);

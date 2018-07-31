@@ -37,9 +37,9 @@
 #include <QtGui/QImage>
 #endif
 
-#ifdef  SUPPORT_3DS
-#include <lib3ds.h>
-//#include <lib3ds/mesh.h>
+#ifdef SUPPORT_3DS
+    #include <lib3ds/mesh.h>
+    #include <lib3ds/file.h>
 #endif
 
 #include "kongobase.h"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+	<class id="Noman" Name="Не выбрано" />
+	<class id="Woman:" Name="Женский манекен">
+		<class id="Empty:" Name="Не выбрано" />
+		<class id="Dress:" Name="Платьe" />
+		<class id="ComplexDress:" Name="Платьe сложной формы" />
+		<class id="Blouse:" Name="Блузка" />
+		<class id="ComplexBlouse:" Name="Блузка сложной формы" />
+		<class id="StraightSkirt:" Name="Юбка" />
+		<class id="ComplexSkirt:" Name="Юбка сложной формы" />
+		<class id="Pants:" Name="Брюки" />
+	</class>
+	<class id="Man:" Name="Мужской манекен">
+		<class id="ManEmpty:" Name="Не выбрано" />
+		<class id="Jacket:" Name="Пиджак" />
+	</class>
+</models>

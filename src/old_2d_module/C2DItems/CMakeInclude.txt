@@ -1,0 +1,16 @@
+set( C2DLibrary  src/old_2d_module/C2DItems/C2DBasic.cpp )
+
+set( C2DItems
+     src/old_2d_module/C2DItems/Items/C2DFlaredSkirt.cpp
+     src/old_2d_module/C2DItems/Items/C2DFlaredSkirtKMProperties.cpp
+     src/old_2d_module/C2DItems/Items/C2DTulipSkirt.cpp
+     src/old_2d_module/C2DItems/Items/C2DDefaultBelt.cpp )
+
+add_library(c2dbasic SHARED ${C2DItems} ${C2DLibrary} )
+target_link_libraries( c2dbasic elcore c2dfitems ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} )
+set_target_properties(c2dbasic PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/items RUNTIME_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/items AUTOMOC TRUE)
+
+if(OLD_C2D_DEBUG)
+ set_target_properties(c2dbasic PROPERTIES COMPILE_DEFINITIONS C2D_DEBUG)
+endif()
+

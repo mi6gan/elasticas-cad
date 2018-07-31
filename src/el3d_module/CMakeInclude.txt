@@ -1,0 +1,25 @@
+set(SUPPORT_CARVE TRUE CACHE BOOL "Support features of Carve CSG library")
+
+file(GLOB EL3D_MODULE_CPPS src/el3d_module/*.cpp)
+list(REMOVE_ITEM EL3D_MODULE_CPPS ${CMAKE_CURRENT_SOURCE_DIR}/src/el3d_module/main.cpp)
+set(EL3D_MODULE_LINK_LIBS elcore ${OPENGL_gl_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${QT_QTGUI_LIBRARY} ${PYTHON_LIBRARIES} kongomato)
+
+if(SUPPORT_CARVE)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/el3d_module/3rd_party/carve)
+    add_definitions(-DWITH_CARVE)
+    set(LINK_DIRS ${LINK_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/src/el3d_module/3rd_party/carve/lib)
+    set(INCLUDE_DIRS ${INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/src/el3d_module/3rd_party/carve/include)
+    set(EL3D_MODULE_LINK_LIBS ${EL3D_MODULE_LINK_LIBS} carve)
+endif(SUPPORT_CARVE)
+
+add_library(00el3d_module SHARED ${EL3D_MODULE_CPPS})
+target_link_libraries(00el3d_module ${EL3D_MODULE_LINK_LIBS})
+set_target_properties(00el3d_module PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules RUNTIME_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules AUTOMOC TRUE)
+
+file(COPY src/el3d_module/scripts DESTINATION ${ELOUTPUT_DIR})
+
+#compile executable to validate references of library
+#add_executable(el3d_module_test src/el3d_module/main.cpp)
+#target_link_libraries(el3d_module_test 00el3d_module ${GLOBAL_EXEC_LIBS})
+#set_target_properties(el3d_module_test PROPERTIES COMPILE_DEFINITIONS ${GLOBAL_EXEC_DEFS})
+

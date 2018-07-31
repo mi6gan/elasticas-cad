@@ -1,0 +1,12 @@
+file(GLOB DEBUG_MODULE_CPPS src/debug_module/*.cpp)
+list(REMOVE_ITEM DEBUG_MODULE_CPPS ${CMAKE_CURRENT_SOURCE_DIR}/src/debug_module/main.cpp)
+set(DEBUG_MODULE_LINK_LIBS elcore ${QT_QTSQL_LIBRARY})
+add_library(02debug_module SHARED  ${DEBUG_MODULE_CPPS})
+target_link_libraries(02debug_module ${DEBUG_MODULE_LINK_LIBS})
+set_target_properties(02debug_module PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules RUNTIME_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules AUTOMOC TRUE)
+
+#compile executable to validate references of library
+#add_executable(debug_module_test src/debug_module/main.cpp)
+#target_link_libraries(debug_module_test 02debug_module ${GLOBAL_EXEC_LIBS})
+#set_target_properties(debug_module_test PROPERTIES COMPILE_DEFINITIONS ${GLOBAL_EXEC_DEFS})
+

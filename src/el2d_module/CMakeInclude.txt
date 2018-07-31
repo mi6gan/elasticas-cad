@@ -1,0 +1,36 @@
+find_package(Qt4 COMPONENTS QtSvg)
+
+file(GLOB EL2D_MODULE_CPPS src/el2d_module/*.cpp)
+list(REMOVE_ITEM EL2D_MODULE_CPPS ${CMAKE_CURRENT_SOURCE_DIR}/src/el2d_module/main.cpp)
+file(GLOB EL2D_MODULE_PLOTS_CPPS src/el2d_module/plots/*.cpp)
+file(GLOB EL2D_MODULE_PLOTS_HS src/el2d_module/plots/*.h)
+file(REMOVE "plots.hxx")
+set(PLOTS_HXX_HEAD "/* this file is auto generated */\n")
+set(PLOTS_HXX_BODY "void initPlots(QHash<QString,Plot*> & plots,QGraphicsScene* scene){\n")
+foreach(PLOT ${EL2D_MODULE_PLOTS_HS})
+	file(STRINGS ${PLOT} PLOT_STRINGS LIMIT_COUNT 3)
+	list(GET PLOT_STRINGS 0 PLOTSTRING)
+	string(COMPARE EQUAL "${PLOTSTRING}" "/*" PASS)
+	if(PASS)
+		list(GET PLOT_STRINGS 1 PLOTCLASSNAME)
+		list(GET PLOT_STRINGS 2 PLOTNAMES)
+		set(PLOTS_HXX_HEAD "${PLOTS_HXX_HEAD}\#include \"${PLOT}\"\n")
+		foreach(PLOTNAME ${PLOTNAMES})
+			set(PLOTS_HXX_BODY "${PLOTS_HXX_BODY}plots[${PLOTNAME}]=new ${PLOTCLASSNAME}(scene);\n")
+		endforeach()
+	endif()
+endforeach()
+file(APPEND "plots.hxx" "${PLOTS_HXX_HEAD}${PLOTS_HXX_BODY}}\n")
+
+set(EL2D_MODULE_CPPS ${EL2D_MODULE_CPPS} ${EL2D_MODULE_PLOTS_CPPS})
+set(EL2D_MODULE_LINK_LIBS elcore ${QT_QTSVG_LIBRARY})
+add_library(03el2d_module SHARED ${EL2D_MODULE_CPPS})
+target_link_libraries(03el2d_module ${EL2D_MODULE_LINK_LIBS})
+set_target_properties(03el2d_module PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules RUNTIME_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules AUTOMOC TRUE)
+
+#compile executable to validate references of library
+#add_executable(el2d_module_test src/el2d_module/main.cpp)
+#target_link_libraries(el2d_module_test 03el2d_module ${GLOBAL_EXEC_LIBS})
+#set_target_properties(el2d_module_test PROPERTIES COMPILE_DEFINITIONS ${GLOBAL_EXEC_DEFS})
+
+

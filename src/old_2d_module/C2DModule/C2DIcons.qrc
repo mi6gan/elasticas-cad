@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/1.png</file>
+        <file>Images/2.png</file>
+        <file>Images/3.png</file>
+        <file>Images/arc.png</file>
+        <file>Images/circle.png</file>
+        <file>Images/del.png</file>
+        <file>Images/Dialog1.png</file>
+        <file>Images/fabrics.png</file>
+        <file>Images/info.png</file>
+        <file>Images/line.png</file>
+        <file>Images/move.png</file>
+        <file>Images/point.png</file>
+        <file>Images/print.png</file>
+        <file>Images/ruller.png</file>
+        <file>Images/spline.png</file>
+        <file>Images/straight.png</file>
+        <file>Images/Preload.png</file>
+    </qresource>
+</RCC>

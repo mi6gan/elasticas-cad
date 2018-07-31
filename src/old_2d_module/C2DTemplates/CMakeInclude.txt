@@ -1,0 +1,11 @@
+file(GLOB C2DTemplates src/old_2d_module/C2DTemplates/*.cpp)
+file(GLOB C2DItems src/old_2d_module/C2DTemplates/Items/*.cpp)
+file(GLOB C2DItems_myclasses src/old_2d_module/C2DTemplates/Items/myclasses/*.cpp)
+set(C2DTemplates ${C2DTemplates} ${C2DItems} ${C2DItems_myclasses})
+
+add_library( c2dtemplates SHARED ${C2DTemplates})
+target_link_libraries( c2dtemplates c2dfitems elcore ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+set_target_properties(c2dtemplates PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/items RUNTIME_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/items AUTOMOC TRUE)
+if(BUILD_DEBUG)
+ set_target_properties(c2dtemplates PROPERTIES COMPILE_DEFINITIONS C2D_DEBUG)
+endif()

@@ -1,0 +1,46 @@
+set( C2DKernel
+     src/old_2d_module/C2DModule/C2DModule.cpp
+     src/old_2d_module/C2DModule/C2DKernel.cpp
+     src/old_2d_module/C2DModule/C2DCommon.cpp
+     src/old_2d_module/C2DModule/C2DViewport.cpp
+     src/old_2d_module/C2DModule/C2DRuller.cpp
+     src/old_2d_module/C2DModule/C2DPlugin.cpp
+    )
+
+
+set( C2DSources
+     src/old_2d_module/C2DModule/Frameworks/Items/include/Unicus/Geometry.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/Unicus/Intersection.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DDialog.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DVariable.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DSync.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DExchange.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DPropertiesDialog.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DItemDialog.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DManager.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DLayerManager.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DSceneItems.cpp
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DItem.cpp)
+
+set( C2DHeaders
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DLayer.h
+     src/old_2d_module/C2DModule/Frameworks/Items/include/C2DDialog.h )
+
+QT4_ADD_RESOURCES( C2DResources src/old_2d_module/C2DModule/C2DIcons.qrc )
+
+if( C2D_UNDO )
+    set( C2DFrameworks old_2d_module/C2DModule/Frameworks/Undo/C2DCommands.cpp )
+endif( C2D_UNDO )
+
+add_library( c2dfitems STATIC  ${C2DSources} ${C2DHeaders})
+target_link_libraries( c2dfitems ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} )
+set_target_properties(c2dfitems PROPERTIES AUTOMOC TRUE)
+
+add_library( 04C2D SHARED ${C2DKernel} ${C2DResources} )
+target_link_libraries( 04C2D elcore c2dfitems ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} )
+set_target_properties(04C2D PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules RUNTIME_OUTPUT_DIRECTORY ${ELOUTPUT_DIR}/modules AUTOMOC TRUE)
+
+if(BUILD_DEBUG)
+ set_target_properties(04C2D PROPERTIES COMPILE_DEFINITIONS C2D_DEBUG)
+ set_target_properties(c2dfitems PROPERTIES COMPILE_DEFINITIONS C2D_DEBUG)
+endif()

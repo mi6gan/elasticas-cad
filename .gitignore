@@ -7,8 +7,8 @@ moc_*.cpp*
 *.qrc.depends
 /debug
 /release
-/vms/*/*.log
-/vms/*/.vagrant
+*.log
+.vagrant
 cmake_install.cmake
 Makefile
 CMakeCache.txt
